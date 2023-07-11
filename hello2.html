@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+<meta charset="UTF-8">
+
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+  
+<title>TEST : GSAP ScrollTrigger</title>
+<link rel="canonical" href="https://codepen.io/hexagoncircle/pen/LYpaPQp" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+
+
+
+<!--<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>-->
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&display=swap");
+* { padding:0; margin:0;}
+.scrollContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 100vh;
+  flex-direction: column;
+  background: #444;
+}
+
+.box {
+  width: 150px;
+  height: 150px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position:relative;
+}
+
+.section { 
+	display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
+  flex-direction: column;
+  background: #444;
+  width:100%;
+  position:relative;
+
+}
+.section1 { height:100%; }
+.section2 { height:100%;}
+.section3 { height:100%;}
+.section4 { height:100%; }
+.section5 { height:100%;}
+
+.box1 { background: pink; }
+.box2 { background: orange; }
+.box3 { background: green; }
+.box4 { background: gray; transform:scale(1); }
+.box5 { background: yellow; transition:all 0.3s ease-out; }
+.under1 { height:50vh; background:pink; width:100%; opacity:0.5 }
+.under2 { height:50vh; background:orange; width:100%; opacity:0.5}
+.under3 { height:50vh; background:green; width:100%; opacity:0.5}
+.under4 { height:50vh; background:gray; width:100%; opacity:0.5}
+.under5 { height:50vh; background:yellow; width:100%; opacity:0.5}
+
+.footer { background: black; height:100vh; width:100%; }
+
+.txt1 { position:absolute; left:-100%; top:200px; z-index:3; font-size:20px; font-weight:700; padding:10px; border:1px solid yellow; }
+
+model-viewer {
+  --poster-color: #e2e8f0;
+  --progress-bar-color: rgba(30, 41, 59, .5);
+  --progress-bar-height: 10px;
+}
+</style>
+
+<script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+<!--gsap.to/ from/ fromTo 예제-->
+
+
+<div class="scrollContainer">
+	<section class="section section1">
+
+	 
+
+		<div class="box box1">to</div>
+		<div class="under1">under1</div>
+	</section>
+	<section class="section section2">
+		<div class="box box2">from</div>
+		<div class="under2">under1</div>
+
+		<div class="txt1">
+			TEXT | Cambridge English Dictionary에서의 의미
+		</div>
+
+	</section>
+	<section class="section section3">
+		<div class="box box3">fromTo</div>
+		<div class="under3">under1</div>
+	</section>
+	<section class="section section4">
+		<div class="box box4">gsap.set</div>
+		<div class="under4">under2</div>
+	</section>
+	<section class="section section5">
+		<div class="box box5">timeline()</div>
+		<div class="under5">under3</div>
+	</section>
+
+
+
+
+	<div class="footer">footer</div>
+</div>
+<script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.6/swiper-bundle.min.js'></script>
+<script src='https://unpkg.co/gsap@3/dist/gsap.min.js'></script>
+<script src='https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js'></script>
+
+      <script id="rendered-js" >
+	  gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".box1", {
+  scrollTrigger: {
+    trigger: '.section1',//객체기준범위
+    start: "0% 100%",//시작 지점
+    end: "100% 50%",//끝 지점
+    // end: "+=500"//시작 부분부터 500px까지 스크롤 한 후종료
+    scrub: 1,//부드러운 스크러빙
+    markers: true,//개발가이드선
+  },
+//  x: 0,
+//  height: 500,
+  width:'100%',
+//  rotation: 360
+});
+
+gsap.to(".txt1", {
+  scrollTrigger: {
+    trigger: '.section2',//객체기준범위
+    start: "0% 50%",//시작 지점
+    end: "100% 50%",//끝 지점
+    // end: "+=500"//시작 부분부터 500px까지 스크롤 한 후종료
+    scrub: 1,//부드러운 스크러빙
+    markers: true,//개발가이드선
+  },
+	  left: '50%',
+//  height: 500,
+	scale:'4'
+//  rotation: 360
+});
+
+
+
+gsap.to(".box2", {
+  scrollTrigger: {
+    trigger: '.section2',//객체기준범위
+    start: "0% 20%",//시작 지점
+    end: "100% 100%",//끝 지점
+    // end: "+=500"//시작 부분부터 500px까지 스크롤 한 후종료
+    scrub: 1,//부드러운 스크러빙
+    markers: true,//개발가이드선
+  },
+//  x: 0,
+  height: '40vh',
+//  width:'100vw',
+//  rotation: 360
+});
+
+gsap.to(".under2", {
+  scrollTrigger: {
+    trigger: '.under2',//객체기준범위
+    start: "0% 20%",//시작 지점
+    end: "100% 100%",//끝 지점
+    // end: "+=500"//시작 부분부터 500px까지 스크롤 한 후종료
+    scrub: 1,//부드러운 스크러빙
+    markers: true,//개발가이드선
+  },
+//  x: 0,
+  height: '50vh',
+  background:'black',
+//  width:'100vw',
+//  rotation: 360
+});
+
+
+gsap.to(".box3", {
+  scrollTrigger: {
+    trigger: '.section3',//객체기준범위
+    start: "0% 20%",//시작 지점
+    end: "100% 100%",//끝 지점
+    // end: "+=500"//시작 부분부터 500px까지 스크롤 한 후종료
+    scrub: 1,//부드러운 스크러빙
+    markers: true,//개발가이드선
+  },
+//  x: 300,
+  height: '50vh',
+  width:'100vw',
+//  rotation: 360
+});
+
+gsap.to(".box4", {
+  scrollTrigger: {
+    trigger: '.section4',//객체기준범위
+    start: "0% 20%",//시작 지점
+    end: "100% 100%",//끝 지점
+    // end: "+=500"//시작 부분부터 500px까지 스크롤 한 후종료
+    scrub: 1,//부드러운 스크러빙
+    markers: true,//개발가이드선
+  },
+  x: 500,
+  rotation: 360
+});
+
+gsap.to(".box5", {
+  scrollTrigger: {
+    trigger: '.section5',//객체기준범위
+    start: "0% 20%",//시작 지점
+    end: "100% 30%",//끝 지점
+    // end: "+=500"//시작 부분부터 500px까지 스크롤 한 후종료
+    scrub: 1,//부드러운 스크러빙
+    markers: true,//개발가이드선
+  },
+  x: 0,
+  rotation: 360,
+  width:400,
+  height:400
+});
+
+/*
+gsap.to(대상, {
+	scrollTrigger:{
+    	trigger:대상,
+        스크롤속성:값,
+        스크롤속성:값
+	}, 속성:값, duration:재생시간
+})
+*/
+
+
+
+
+
+
+
+</script>
+
+  
+</body>
+</html>
